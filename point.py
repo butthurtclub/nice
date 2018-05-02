@@ -8,10 +8,41 @@ __all__ = (
 )
 
 class Point:
-    def __init__(self, first_arg=0, second_arg=0):
-        self.x = first_arg
-        self.y = second_arg
+    """
+    A class for Point(x,y) representing.
+    Supported types: integer, floating.
+
+    Usage:
+    >>> first = Point()
+    >>> first
+    (0, 0)
+    >>> second = Point(0, 2)
+    >>> second
+    (0, 2)
+    >>> first.distance(second)
+    2.0
+    >>> first == second
+    False
+    >>> first = second
+    >>> first == second
+    >>> True
+    """
+
+    def __init__(self, x=0, y=0):
+        """
+        The initializer.
+
+        :param x: x-coordinate. Possible values: integer, float.
+        :param y: y-coordinate. Possible values: integer, float. 
+        """
+        self.x = x
+        self.y = y
     def distance(self, other):
+        """
+        Counts distance between two points.
+        :param other: Point.
+        :return: float.
+        """
         return hypot(self.x - other.x, self.y - other.y)
     def __eq__(self, other):
         return self.x == other.x and self.y == other.y
@@ -45,6 +76,11 @@ class PointTest(unittest.TestCase):
         second = Point(1, 2)
         self.assertNotEqual(first, second)
 
+first = Point()
+second = Point(0, 2)
+print(first)
+print(second)
+print(first.distance(second))
 
 if __name__ == '__main__':
     unittest.main()
