@@ -3,6 +3,10 @@ __author__ = 'nice'
 from math import hypot
 import unittest
 
+__all__ = (
+    'Point',
+)
+
 class Point:
     def __init__(self, first_arg=0, second_arg=0):
         self.x = first_arg
@@ -13,6 +17,8 @@ class Point:
         return self.x == other.x and self.y == other.y
     def __ne__(self, other):
         return self.x != other.x and self.y != other.y
+    def __repr__(self):
+        return '({}, {})'.format(self.x, self.y)
     def __str__(self):
         return '({}, {})'.format(self.x, self.y)
 
