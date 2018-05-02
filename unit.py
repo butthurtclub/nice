@@ -50,10 +50,42 @@ class Unit:
         :type damage: integer, float.
         """
 
-        self.name = name
-        self.hit_points_limit = hit_points
-        self.hit_points = hit_points
-        self.damage = damage
+        self._name = name
+        self._hit_points_limit = hit_points
+        self._hit_points = hit_points
+        self._damage = damage
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        self._name = value
+
+    @property
+    def hit_points_limit(self):
+        return self._hit_points_limit
+
+    @hit_points_limit.setter
+    def hit_points_limit(self, value):
+        self._hit_points_limit = value
+
+    @property
+    def hit_points(self):
+        return self._hit_points
+
+    @hit_points.setter
+    def hit_points(self, value):
+        self._hit_points = value
+
+    @property
+    def damage(self):
+        return self._damage
+
+    @damage.setter
+    def damage(self, value):
+        self._damage = value
 
     def __str__(self):
         return 'Name: {}\nDamage: {}\nHit Points: {}\n'.format(self.name, self.damage, self.hit_points)

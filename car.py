@@ -1,7 +1,7 @@
 __author__ = 'nice'
 
 from math import hypot
-from point import *
+from point import Point
 import unittest
 
 class NotEnoughFuelException(Exception):
@@ -38,11 +38,51 @@ class Car:
         :param location: Possible values: Point().
         """
 
-        self.model = model
-        self.fuel_amount = fuel_amount if fuel_amount <= fuel_capacity else fuel_capacity
-        self.fuel_capacity = fuel_capacity
-        self.fuel_consumption = fuel_consumption
-        self.location = location
+        self._model = model
+        self._fuel_amount = fuel_amount if fuel_amount <= fuel_capacity else fuel_capacity
+        self._fuel_capacity = fuel_capacity
+        self._fuel_consumption = fuel_consumption
+        self._location = location
+
+    @property
+    def model(self):
+        return self._model
+
+    @model.setter
+    def model(self, value):
+        self._model = value
+
+    @property
+    def fuel_amount(self):
+        return self._fuel_amount
+
+    @fuel_amount.setter
+    def fuel_amount(self, value):
+        self._fuel_amount = value
+
+    @property
+    def fuel_capacity(self):
+        return self._fuel_capacity
+
+    @fuel_capacity.setter
+    def fuel_capacity(self, value):
+        self._fuel_capacity = value
+
+    @property
+    def fuel_consumption(self):
+        return self._fuel_consumption
+
+    @fuel_consumption.setter
+    def fuel_consumption(self, value):
+        self._fuel_consumption = value
+
+    @property
+    def location(self):
+        return self._location
+
+    @location.setter
+    def location(self, value):
+        self._location = value
 
     def __str__(self):
         return 'Model: {}\nLocation: {}'.format(self.model, self.location)
@@ -57,10 +97,7 @@ class Car:
         :return: validate status.
         """
 
-        if self.fuel_amount >= self.location.distance(destination) * self.fuel_consumption:
-            return True
-        else:
-            return False
+        return self.fuel_amount >= self.location.distance(destination) * self.fuel_consumption
 
     def refill(self, amount=100):
         """
@@ -84,11 +121,10 @@ class Car:
         :raise NotEnoughFuelException: If not enough fuel to reach the required location.
         """
 
-        if self.validate(destination):
-            self.fuel_amount -= self.location.distance(destination) * self.fuel_consumption
-            self.location = destination
-        else:
-            raise NotEnoughFuelException('Not enough fuel')
+        if not self.validate(destination):
+            raise NotEnoughFuel('Not enough fuel')
+        self.fuel_amount -= self.location.distance(destination) * self.fuel_consumption
+        self.location = destination            
 
 class CarTest(unittest.TestCase):
     def test_initial(self):
