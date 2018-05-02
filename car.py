@@ -5,6 +5,7 @@ from point import *
 import unittest
 
 class NotEnoughFuelException(Exception):
+    """A class for exceptions."""
     pass
 
 
